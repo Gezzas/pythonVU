@@ -35,7 +35,7 @@ def print_dir(dir_path, filler):
             words = merge_dicts(words, tmp)
         else:
             print
-            tmp = word_count(file_name)
+            tmp = word_count(file_path)
             words = merge_dicts(words, tmp)
     return words
 
