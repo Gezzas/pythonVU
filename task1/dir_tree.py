@@ -24,28 +24,38 @@ def merge_dicts(dict1, dict2):
     return new_dict
 
 
-def print_dir(dir_path, filler):
+def get_dir_word_count(dir_path):
     words = {}
     for file_name in listdir(dir_path):
-        print filler + file_name,
         file_path = dir_path + "/" + file_name
         if path.isdir(file_path):
-            print "/"
-            tmp = print_dir(file_path, filler + "  ")
+            tmp = get_dir_word_count(file_path)
             words = merge_dicts(words, tmp)
         else:
-            print
             tmp = word_count(file_path)
             words = merge_dicts(words, tmp)
     return words
 
 
+def get_dir_str(dir_path, filler):
+    tmp_str = str()
+    for file_name in listdir(dir_path):
+        tmp_str += filler + file_name
+        file_path = dir_path + "/" + file_name
+        if path.isdir(file_path):
+            tmp_str += '/\n'
+            tmp_str += get_dir_str(file_path, filler + "  ")
+        else:
+            tmp_str += '\n'
+    return tmp_str
+
+
 def print_dir_tree(dir_path):
     if path.isdir(dir_path):
         print "/"
-        words = print_dir(dir_path, "  ")
+        print get_dir_str(dir_path, "  ")
         print
-        print words
+        print get_dir_word_count(dir_path)
     else:
         print "'" + dir_path + "' is not a valid path."
 
