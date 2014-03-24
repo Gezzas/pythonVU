@@ -1,2 +1,2 @@
-script : script.py
-	python dir_tree.py "crap/Compiler"
+script : dir_tree.py
+	python dir_tree.py 

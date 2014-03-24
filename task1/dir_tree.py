@@ -1,5 +1,5 @@
 from os import listdir, path
-from sys import argv
+from argparse import ArgumentParser
 
 
 def print_dir(dir_path, filler):
@@ -22,7 +22,8 @@ def print_dir_tree(dir_path):
 
 
 if __name__ == "__main__":
-    if len(argv) > 1:
-        print_dir_tree(argv[1])
-    else:
-        print_dir_tree(".")
+    parser = ArgumentParser(description="Prints directory tree specified.")
+    parser.add_argument("path", type=str, nargs='?', default='.',
+                        help="Path to directory (default = '.').")
+    args = parser.parse_args()
+    print_dir_tree(args.path)
